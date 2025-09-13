@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>🎂 Happy Birthday, Snowiee!</title>
+<meta name="theme-color" content="#ff6ec7">
+<style>
+:root{
+  --bg-1:#0f1020; --bg-2:#1a1b3a; --pink:#ff6ec7; --vio:#9b5de5; --mint:#00f5d4; --gold:#ffd166; --white:#ffffff; --soft:#eae8ff;
+}
+html,body{margin:0;height:100%;font-family:ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; background: radial-gradient(1200px 800px at 80% -10%, #2a2a5a 0%, #17182e 50%, #0f1020 100%); color:var(--soft);}
+.container{max-width:900px;margin:0 auto;padding:18px 16px 80px;}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.12);box-shadow:0 10px 30px rgba(0,0,0,0.35);backdrop-filter: blur(10px);border-radius:24px;padding:18px;}
+.center{text-align:center}
+h1{font-size: clamp(28px, 5.5vw, 44px);line-height:1.15;margin:10px 0;background:linear-gradient(90deg,var(--pink),var(--mint),var(--vio));-webkit-background-clip:text;background-clip:text;color:transparent;}
+h2{font-size: clamp(20px, 4.8vw, 28px);margin:0 0 8px}
+p{font-size: clamp(15px, 3.8vw, 18px); color:#d9dbff}
+.btn{display:inline-block; cursor:pointer; border:none; padding:14px 20px; border-radius:16px; font-weight:700; font-size:18px; color:#0a0a12; background:linear-gradient(135deg,var(--gold),#ff9f1c); box-shadow: 0 8px 18px rgba(255,209,102,0.35);}
+.btn:active{transform: translateY(1px)}
+.floating-hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden;}
+.heart{position:absolute; font-size:16px; animation: floatUp linear forwards; opacity:0.9}
+@keyframes floatUp{0%{transform:translateY(0) scale(0.8); opacity:0}10%{opacity:1}100%{transform:translateY(-120vh) scale(1.4); opacity:0}}
+
+.hero{display:grid; gap:10px; align-items:center; justify-items:center; padding:26px 16px}
+.hero .date-pill{font-size:13px; letter-spacing:1px; text-transform:uppercase; color:#c7c9ff; opacity:0.8}
+.sparkle{filter: drop-shadow(0 0 6px rgba(255,110,199,0.6));}
+
+.split{display:grid; gap:14px; grid-template-columns:1fr;}
+@media(min-width:720px){.split{grid-template-columns:1.1fr 1fr}}
+
+.countdown{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+.timebox{min-width:66px; padding:10px; border-radius:14px; background:linear-gradient(180deg, rgba(155,93,229,0.18), rgba(255,110,199,0.14)); border:1px solid rgba(255,255,255,0.16); text-align:center}
+.timebox .num{font-size:26px; font-weight:800; color:#fff}
+.timebox .lbl{font-size:12px; opacity:0.8}
+
+.reasons{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.reason{padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.12);background:linear-gradient(180deg, rgba(0,245,212,0.1), rgba(255,110,199,0.08));font-weight:600}
+@media(max-width:420px){.reasons{grid-template-columns:1fr}}
+
+.scratch-wrap{position:relative}
+canvas#scratch{width:100%;height:220px;border-radius:18px;display:block;background:linear-gradient(120deg,#0d0e22,#1a1b3a);border:1px dashed rgba(255,255,255,0.25)}
+.secret{position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:16px}
+
+.letter{white-space:pre-wrap; line-height:1.6; background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.12); border-radius:18px; padding:16px}
+
+.footer{margin-top:20px; opacity:0.8; font-size:12px; text-align:center}
+
+.hidden{display:none}
+
+/* PHOTO GALLERY */
+.gallery-container{overflow:hidden;position:relative;margin:20px 0;}
+.gallery-wrapper{display:flex;transition:transform 0.3s ease;}
+.gallery-wrapper img{width:100px;height:100px;margin:5px;border-radius:12px;object-fit:cover;flex-shrink:0;cursor:pointer;}
+.gallery-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:24px;padding:8px 12px;border-radius:50%;cursor:pointer;}
+.gallery-btn.left{left:5px;}
+.gallery-btn.right{right:5px;}
+
+/* GAMES SECTION */
+.game-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:10px;}
+.game-buttons .btn{padding:10px 14px;font-size:16px;}
+#containerGame{min-height:300px;text-align:center;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="floating-hearts" id="hearts"></div>
+
+<div class="container">
+
+  <!-- HERO SECTION -->
+  <section class="hero card center">
+    <div class="date-pill">September 15 • Birthday Surprise</div>
+    <h1 id="title">Happy Birthday, <span id="nameSpan">Snowiee</span> 🎉</h1>
+    <p>We might be miles apart, but my heart is always right next to yours. Tap below to open your surprise.</p>
+    <button class="btn" id="startBtn">Tap to Open ✨</button>
+    <audio id="song" preload="auto" class="hidden" controls></audio>
+    <p style="font-size:12px;opacity:.7">(Optional) After opening, you can load a song using the music button below.</p>
+  </section>
+
+  <!-- SPLIT SECTION: Countdown + Music -->
+  <section class="split">
+    <div class="card">
+      <h2>Countdown to Your Day ⏳</h2>
+      <p>Can’t wait! Here’s the time left till your birthday.</p>
+      <div class="countdown" id="countdown">
+        <div class="timebox"><div class="num" id="dd">--</div><div class="lbl">Days</div></div>
+        <div class="timebox"><div class="num" id="hh">--</div><div class="lbl">Hours</div></div>
+        <div class="timebox"><div class="num" id="mm">--</div><div class="lbl">Minutes</div></div>
+        <div class="timebox"><div class="num" id="ss">--</div><div class="lbl">Seconds</div></div>
+      </div>
+    </div>
+    <div class="card center">
+      <h2>Play Our Song ♪</h2>
+      <p>Add any MP3/MP4 file from your phone to play while you read.</p>
+      <input type="file" id="filePick" accept="audio/*,video/*" />
+      <div style="margin-top:10px"><button class="btn" id="playBtn">Play / Pause</button></div>
+    </div>
+  </section>
+
+  <!-- REASONS -->
+  <section class="card">
+    <h2>10 Little Reasons I Adore You 💌</h2>
+    <div class="reasons" id="reasons"></div>
+  </section>
+
+  <!-- SCRATCH CARD -->
+  <section class="card">
+    <h2>Scratch to Reveal 🎁</h2>
+    <p>Use your finger to scratch the card and reveal your message.</p>
+    <div class="scratch-wrap">
+      <canvas id="scratch"></canvas>
+      <div class="secret">
+        <h2 class="sparkle">I’m counting the days till I can hug you for real. Until then, close your eyes and feel my arms around you. 🤍</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOVE LETTER -->
+  <section class="card">
+    <h2>From Me to You</h2>
+    <div class="letter" id="letter"></div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="card">
+    <h2>Photo Memories 📸</h2>
+    <div class="gallery-container">
+      <button class="gallery-btn left" id="prevBtn">&#10094;</button>
+      <div class="gallery-wrapper" id="gallery"></div>
+      <button class="gallery-btn right" id="nextBtn">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- GAMES SECTION -->
+  <section class="card">
+    <h2>Mini Games 🎮</h2>
+    <div class="game-buttons">
+      <button class="btn" onclick="showGame('memory')">Memory Game</button>
+      <button class="btn" onclick="showGame('tictactoe')">Tic Tac Toe</button>
+      <button class="btn" onclick="showGame('rps')">Rock Paper Scissors</button>
+      <button class="btn" onclick="showGame('whack')">Whack-a-Mole</button>
+      <button class="btn" onclick="showGame('colormatch')">Color Match</button>
+    </div>
+    <div id="containerGame"></div>
+  </section>
+
+  <div class="footer">Made with ❤️ by Aayu</div>
+</div>
+
+<script>
+// ====== Floating Hearts ======
+const hearts = ['❤','💖','💝','💘','💗','💓','💞','💕'];
+function spawnHeart(){
+  const h = document.createElement('div');
+  h.className='heart';
+  h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+  const left = Math.random()*100; const dur = 6+Math.random()*6; const size = 14+Math.random()*22;
+  h.style.left = left+'vw'; h.style.bottom='-10vh'; h.style.animationDuration = dur+'s'; h.style.fontSize = size+'px';
+  h.style.color = `hsl(${Math.floor(Math.random()*360)}, 90%, 70%)`;
+  document.getElementById('hearts').appendChild(h);
+  setTimeout(()=>h.remove(), dur*1000);
+}
+setInterval(spawnHeart, 600);
+
+// ====== Countdown ======
+function targetDate(){
+  const now = new Date();
+  let year = now.getFullYear();
+  let t = new Date(`${year}-09-15T00:00:00`);
+  if(now > t){ t = new Date(`${year+1}-09-15T00:00:00`); }
+  return t;
+}
+function tick(){
+  const t = targetDate(); const now = new Date(); const diff = t - now;
+  const sec = Math.max(0, Math.floor(diff/1000));
+  const d = Math.floor(sec/86400); const h = Math.floor((sec%86400)/3600);
+  const m = Math.floor((sec%3600)/60); const s = sec%60;
+  document.getElementById('dd').textContent = String(d);
+  document.getElementById('hh').textContent = String(h).padStart(2,'0');
+  document.getElementById('mm').textContent = String(m).padStart(2,'0');
+  document.getElementById('ss').textContent = String(s).padStart(2,'0');
+}
+setInterval(tick,1000); tick();
+
+// ====== Reasons ======
+const reasonsArr = [
+  'Your laugh makes distance feel smaller',
+  'You always text “Acchyaaa, kuch nhi”',
+  'You believe in me on rough days',
+  'The way you say my name on calls....Aayuu',
+  'Your love for the tiniest moments',
+  'Your voice during calls hehe',
+  'Your honesty and gentle heart',
+  'We dream loudly together',
+  'You make ordinary days glow',
+  'You are my favorite “what if” come true'
+];
+const $reasons = document.getElementById('reasons');
+reasonsArr.forEach((r,i)=>{
+  const el = document.createElement('div');
+  el.className='reason';
+  el.textContent = (i+1)+'. '+r;
+  $reasons.appendChild(el);
+});
+
+// ====== Love Letter ======
+const letterText = `Hey Snowiee,
+
+Happy Birthday, my cutu cutu snownaa. I wish I could be there to light your candles and steal your frosting, but until then, here’s a page full of the love I carry for you. Thank you for choosing me, for waiting with me, for loving me across cities and time zones.
+
+I’m proud of who you are and everything you’re becoming. Today is yours—make a wish. I’ll spend every day trying to make it come true bss Snowieee jii hamesha happy tu yu tu yu rhe aur kya chahiye aur bachu jldi se cake aur chocolates bhejo idhar billu ko bohot bhuk lgi h hehehehehehehehe Badmosh pookie princess
+
+— Aayu`;
+function typeIt(text){
+  const box = document.getElementById('letter'); box.textContent='';
+  let i=0; const step=()=>{ box.textContent = text.slice(0,i++); if(i<=text.length) requestAnimationFrame(step); };
+  step();
+}
+
+// ====== Scratch Card ======
+const scratchCanvas = document.getElementById('scratch');
+const sctx = scratchCanvas.getContext('2d');
+function resizeScratch(){
+  const rect = scratchCanvas.getBoundingClientRect();
+  scratchCanvas.width = Math.floor(rect.width * devicePixelRatio);
+  scratchCanvas.height = Math.floor(rect.height * devicePixelRatio);
+  sctx.scale(devicePixelRatio, devicePixelRatio);
+  const grad = sctx.createLinearGradient(0,0, rect.width, rect.height);
+  grad.addColorStop(0,'#c0c3d6'); grad.addColorStop(0.5,'#8b90a8'); grad.addColorStop(1,'#dfe2ef');
+  sctx.fillStyle = grad; sctx.fillRect(0,0, rect.width, rect.height);
+  sctx.globalCompositeOperation='destination-out';
+}
+window.addEventListener('resize', resizeScratch); resizeScratch();
+let scratching=false;
+function pos(e){ const r = scratchCanvas.getBoundingClientRect(); const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left; const y=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return {x,y}; }
+function scratch(e){ if(!scratching) return; const {x,y}=pos(e); sctx.beginPath(); sctx.arc(x,y,18,0,Math.PI*2); sctx.fill(); }
+scratchCanvas.addEventListener('pointerdown', e=>{ scratching=true; scratch(e)});
+scratchCanvas.addEventListener('pointermove', scratch);
+window.addEventListener('pointerup', ()=>{ scratching=false});
+
+// ====== Music ======
+const song = document.getElementById('song');
+const filePick = document.getElementById('filePick');
+filePick.addEventListener('change', (e)=>{
+  const file = e.target.files?.[0]; if(!file) return;
+  song.src = URL.createObjectURL(file); song.classList.remove('hidden'); song.play().catch(()=>{});
+});
+document.getElementById('playBtn').addEventListener('click', ()=>{ if(song.src){ song.paused ? song.play() : song.pause(); } else { alert('Pick a song first ✨'); }});
+
+// ====== Start Button ======
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  typeIt(letterText);
+  if(navigator.vibrate){ navigator.vibrate([40, 30, 40]); }
+});
+
+// ====== PHOTO GALLERY ======
+const galleryWrapper = document.getElementById('gallery');
+for(let i=1;i<=10;i++){
+  const img = document.createElement('img');
+  img.src = `image${i}.jpg`; // Images in the same folder as HTML
+  galleryWrapper.appendChild(img);
+}
+let scrollIndex=0;
+const scrollStep=110;
+document.getElementById('prevBtn').addEventListener('click',()=>{scrollIndex=Math.max(scrollIndex-1,0); galleryWrapper.style.transform=`translateX(${-scrollIndex*scrollStep}px)`;});
+document.getElementById('nextBtn').addEventListener('click',()=>{scrollIndex=Math.min(scrollIndex+1,10-5); galleryWrapper.style.transform=`translateX(${-scrollIndex*scrollStep}px)`;});
+
+// ====== GAMES SECTION ======
+const containerGame = document.getElementById('containerGame');
+function showGame(game){
+  containerGame.innerHTML='';
+  if(game==='memory'){memoryGame();}
+  else if(game==='tictactoe'){ticTacToe();}
+  else if(game==='rps'){rpsGame();}
+  else if(game==='whack'){whackGame();}
+  else if(game==='colormatch'){colorMatch();}
+}
+
+// 1️⃣ MEMORY GAME
+function memoryGame(){
+  containerGame.innerHTML='<h3>Memory Game</h3>';
+  const size=4;
+  const cards=[];
+  for(let i=1;i<=size*size/2;i++){cards.push(i);cards.push(i);}
+  cards.sort(()=>Math.random()-0.5);
+  let board = document.createElement('div');
+  board.style.display='grid'; board.style.gridTemplateColumns=`repeat(${size},1fr)`; board.style.gap='10px';
+  let first=null, lock=false;
+  cards.forEach((num)=>{
+    let c=document.createElement('div');
+    c.style.background='var(--vio)'; c.style.height='60px'; c.style.borderRadius='12px'; c.style.display='flex'; c.style.alignItems='center'; c.style.justifyContent='center'; c.style.fontSize='24px'; c.style.cursor='pointer'; c.dataset.num=num;
+    c.addEventListener('click',()=>{
+      if(lock || c.textContent) return;
+      c.textContent=num;
+      if(!first){first=c; return;}
+      if(first.dataset.num===c.dataset.num){first=null;}
+      else{lock=true; setTimeout(()=>{first.textContent=''; c.textContent=''; first=null; lock=false;},700);}
+    });
+    board.appendChild(c);
+  });
+  containerGame.appendChild(board);
+}
+
+// 2️⃣ TIC TAC TOE vs Bot
+function ticTacToe(){
+  containerGame.innerHTML='<h3>Tic Tac Toe</h3>';
+  const board=Array(9).fill('');
+  const grid=document.createElement('div');
+  grid.style.display='grid'; grid.style.gridTemplateColumns='repeat(3,80px)'; grid.style.gap='5px'; grid.style.justifyContent='center';
+  function render(){
+    grid.innerHTML='';
+    board.forEach((v,i)=>{
+      const c=document.createElement('div');
+      c.style.width='80px'; c.style.height='80px'; c.style.background='var(--pink)'; c.style.display='flex'; c.style.alignItems='center'; c.style.justifyContent='center'; c.style.fontSize='32px'; c.style.cursor='pointer'; c.textContent=v;
+      c.addEventListener('click',()=>{if(v||checkWinner())return;board[i]='X';render();botMove();});
+      grid.appendChild(c);
+    });
+  }
+  function botMove(){if(checkWinner()) return; let empty = board.map((v,i)=>v===''?i:null).filter(v=>v!==null); board[empty[Math.floor(Math.random()*empty.length)]]='O'; render();}
+  function checkWinner(){const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; for(const l of lines){const [a,b,c]=l;if(board[a]&&board[a]===board[b]&&board[b]===board[c]){return board[a];}} if(board.every(v=>v)) return 'D'; return null;}
+  containerGame.appendChild(grid);
+  render();
+}
+
+// 3️⃣ Rock Paper Scissors
+function rpsGame(){
+  containerGame.innerHTML='<h3>Rock Paper Scissors</h3>';
+  const options=['✊','✌️','✋'];
+  const out=document.createElement('div'); out.style.margin='10px';
+  options.forEach(o=>{
+    const b=document.createElement('button'); b.textContent=o; b.className='btn'; b.style.margin='3px';
+    b.addEventListener('click',()=>{const bot=options[Math.floor(Math.random()*3)]; alert(`You: ${o}\nBot: ${bot}`);});
+    out.appendChild(b);
+  });
+  containerGame.appendChild(out);
+}
+
+// 4️⃣ Whack-a-Mole
+function whackGame(){
+  containerGame.innerHTML='<h3>Whack-a-Mole</h3>';
+  const grid=document.createElement('div'); grid.style.display='grid'; grid.style.gridTemplateColumns='repeat(4,60px)'; grid.style.gap='5px'; grid.style.justifyContent='center';
+  let cells=[],score=0;
+  for(let i=0;i<16;i++){let c=document.createElement('div'); c.style.width='60px'; c.style.height='60px'; c.style.background='var(--vio)'; c.style.borderRadius='12px'; c.style.cursor='pointer'; grid.appendChild(c); cells.push(c);}
+  containerGame.appendChild(grid);
+  const scoreDiv=document.createElement('div'); scoreDiv.textContent='Score: 0'; containerGame.appendChild(scoreDiv);
+  setInterval(()=>{cells.forEach(c=>c.textContent=''); let mole=cells[Math.floor(Math.random()*16)]; mole.textContent='🐹'; mole.onclick=()=>{score++; scoreDiv.textContent='Score: '+score; mole.textContent='';};},800);
+}
+
+// 5️⃣ Color Match
+function colorMatch(){
+  containerGame.innerHTML='<h3>Color Match</h3>';
+  const colors=['#ff6ec7','#9b5de5','#00f5d4','#ffd166','#ff9f1c'];
+  let targetColor=colors[Math.floor(Math.random()*colors.length)];
+  const targetDiv=document.createElement('div'); targetDiv.textContent='Match: '+targetColor; targetDiv.style.margin='10px'; containerGame.appendChild(targetDiv);
+  colors.forEach(c=>{
+    const b=document.createElement('button'); b.style.background=c; b.style.width='50px'; b.style.height='50px'; b.style.border='none'; b.style.margin='5px'; b.style.borderRadius='8px';
+    b.addEventListener('click',()=>{alert(c===targetColor?'Correct!':'Wrong!'); targetColor=colors[Math.floor(Math.random()*colors.length)]; targetDiv.textContent='Match: '+targetColor;});
+    containerGame.appendChild(b);
+  });
+}
+</script>
+</body>
+</html>
